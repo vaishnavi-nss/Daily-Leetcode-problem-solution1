@@ -1,5 +1,6 @@
 # Daily-Leetcode-problem-solution1
 PROBLEM
+
 You are given a 0-indexed 2D matrix grid of size m x n, where (r, c) represents:
 A land cell if grid[r][c] = 0, or
 A water cell containing grid[r][c] fish, if grid[r][c] > 0.
@@ -10,6 +11,7 @@ Return the maximum number of fish the fisher can catch if he chooses his startin
 An adjacent cell of the cell (r, c), is one of the cells (r, c + 1), (r, c - 1), (r + 1, c) or (r - 1, c) if it exists.
 
 APPROACH
+
 1.Traverse the grid. Recursively visit all adjacent cells starting from starting grid (r,c).
 2.Mark all visited grids as 0 because there is no point in visting them again.
 3.Note the number of fish in each connected grid.
@@ -17,6 +19,7 @@ APPROACH
 5.Update and return this value.
 
 ANALYSIS OF TIME COMPLEXITY
+
 Time complexity:
 Traversing grid: O(m * n)
 DFS: O(m * n)
