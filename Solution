@@ -1,0 +1,44 @@
+#include <vector>
+#include <algorithm>
+#include <functional>
+
+using namespace std;
+
+class Solution {
+public:
+    int findMaxFish(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        int maxFish = 0;
+
+        // Helper function to perform DFS
+        function<int(int, int)> dfs = [&](int r, int c) -> int {
+            // If out of bounds, on land cell, or already visited, stop traversal
+            if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] == 0) {
+                return 0;
+            }
+
+            int fish = grid[r][c];  // Catch the fish in the current cell
+            grid[r][c] = 0;        // Mark the cell as visited by setting it to 0
+
+            // Explore all four possible directions
+            fish += dfs(r + 1, c);  // Down
+            fish += dfs(r - 1, c);  // Up
+            fish += dfs(r, c + 1);  // Right
+            fish += dfs(r, c - 1);  // Left
+
+            return fish;
+        };
+
+        // Iterate through all cells in the grid
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] > 0) {  // Only start from water cells
+                    maxFish = max(maxFish, dfs(i, j));  // Update max fish caught
+                }
+            }
+        }
+
+        return maxFish;
+    }
+};
